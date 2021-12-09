@@ -1,0 +1,65 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar"></header>
+
+<main>
+    <div class="item " style="top: 265px">
+        <h1 style="margin-top: 50px;">Edit product</h1>
+        <form
+                th:object="${productModel}"
+                th:action="@{/product/{id}/edit(id=*{id})}"
+                th:method="patch"  enctype="multipart/form-data">
+
+            <div class="txt_field">
+                <span> <img th:src="*{urlPicture}" class="card-img-top"  alt="..." height="150px" width="120px"/></span>
+            </div>
+
+            <div class="txt_field">
+                <input type="text"
+                       th:field="*{productName}"
+                       th:errorclass="is-invalid"
+                       required
+                       name="product_name">
+                <small id="productNameError"
+                       class="text-danger invalid-feedback">Product name is required.</small>
+                <label>Product Name</label>
+            </div>
+
+            <div class="txt_field">
+                <input th:field="*{price}"
+                        type="text"
+                       required
+                       name="price">
+                <small id="priceError"
+                       class="text-danger invalid-feedback">Price is required and positive.</small>
+                <label>Price</label>
+            </div>
+            <div class="txt_field">
+                <input th:field="*{countProduct}"
+                        type="text"
+                        required
+                        name="price">
+                <small id="countProductError"
+                       class="text-danger invalid-feedback">Count is required and positive or zero.</small>
+                <label>Count</label>
+            </div>
+                    <div >
+                        <input type="submit" class="btnForm" value="Update"/>
+                </div>
+
+
+        </form>
+
+    </div>
+
+
+</main>
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</body>
+
+</html>

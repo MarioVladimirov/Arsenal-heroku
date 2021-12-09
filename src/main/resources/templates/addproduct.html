@@ -1,0 +1,78 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar"></header>
+
+<main>
+    <div class="item ">
+        <h1 style="margin-top: 50px;">Add product</h1>
+        <form th:action="@{/product/add}" th:method="POST" th:object="${productAddBindingModel}"
+              enctype="multipart/form-data">
+
+            <div class="txt_field">
+                <input th:field="*{picture}"
+                       type="file"
+                       required
+                       name="picture"
+                       id="picture">
+                <span></span>
+                <label>Picture</label>
+                <p class="errors alert alert-danger invalid-feedback">
+                    Product picture is required.
+                </p>
+            </div>
+            <div class="txt_field">
+                <input th:field="*{productName}"
+                       type="text"
+                       required
+                       name="product_name"
+                       id="product_name">
+                <span></span>
+                <label>Product Name</label>
+            </div>
+            <div class="txt_field">
+                <input th:field="*{price}"
+                       type="text"
+                       required
+                       name="price"
+                       id="price">
+                <span></span>
+                <label>Price</label>
+            </div>
+            <div class="txt_field">
+                <input th:field="*{countProduct}"
+                       type="text"
+                       required
+                       name="count"
+                       id="count">
+                <span></span>
+                <label>Count</label>
+            </div>
+            <button class="btnForm" type="submit">Add new product</button>
+
+        </form>
+
+    </div>
+
+
+</main>
+
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</body>
+
+</html>
+
+
+<!-- <h2 class="my-5 text-center">NEWS</h2>
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm">1</div>
+                        <div class="col-sm">2</div>
+                        <div class="col-sm">3</div>
+                    </div>
+            </div> -->

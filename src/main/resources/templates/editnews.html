@@ -1,0 +1,68 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+    <header th:replace="fragments/commons :: navigation_menubar"></header>
+
+
+    <main>
+        <div class="item">
+            <h1 style=" margin-top: 100px;">Edit news</h1>
+            <form   th:object="${newsModel}"
+                    th:action="@{/news/edit/{id}(id=*{id})}"
+                    th:method="patch"  enctype="multipart/form-data">
+
+                <div class="txt_field">
+                    <span> <img th:src="*{urlPictureNews}" class="card-img-top"  alt="..." height="150px" width="70px"/></span>
+                </div>
+                <div class="txt_field">
+                    <input type="text"
+                           th:field="*{topic}"
+                           th:errorclass="is-invalid"
+                           required
+                           name="topic">
+                    <small id="newsNameError"
+                           class="text-danger invalid-feedback">News name is required.</small>
+                    <label>Topic</label>
+                </div>
+                <div class="form-group">
+                    <label class="text-white font-weight-bold" for="description">Description</label>
+                    <textarea th:field="*{description}" th:errorclass="is-invalid" name="description"
+                              id="description" type="textarea" class="form-control" rows="3"
+                              placeholder="Description"></textarea>
+
+                    <p class="errors alert alert-danger invalid-feedback">
+                        Description is required.
+                    </p>
+                </div>
+
+                   
+                    <button class="btnForm" type="submit">Save</button>
+                  
+            </form>
+        
+        </div>
+
+
+    </main>
+
+
+    <footer th:replace="fragments/commons :: footer"></footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+
+
+<!-- <h2 class="my-5 text-center">NEWS</h2>
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm">1</div>
+                        <div class="col-sm">2</div>
+                        <div class="col-sm">3</div>
+                    </div>
+            </div> -->

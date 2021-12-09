@@ -1,0 +1,73 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar"></header>
+
+<main>
+
+    <table class="table table-striped table-hover " id="table">
+
+    </table>
+
+        <table class="table table-striped table-hover">
+        <thead>
+
+        <tr>
+            <th colspan="4" class="">
+                <form th:action="@{/admin/adminchangeprofile}" th:method="get">
+                    <input type="text" id="txtSearch" name="keyword"  placeholder="username">
+                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </form>
+
+            </th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Username</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m , d : ${allusers}" th:id="${m.id}">
+            <form th:object="${m}"
+                  th:action="@{/admin/useredit/{id}(id=*{id})}"
+                  th:method="patch">
+                <td th:text="${d.count}" >1</td>
+                <td>
+
+                    <input type="text" name="username" th:value="${m.username}" readonly="readonly"></td>
+                <td>
+
+                    <select th:name="role" id="role">
+                        <option th:each="r :${allrole}"
+                                th:value="${r.role}"
+                                th:text="${r.role}"
+                                th:selected="${r.role eq m.role}">Admin
+                        </option>
+                    </select>
+
+                </td>
+
+                <td>
+                    <input type="submit" class="btn btn-outline-secondary" value="Save"/>
+                </td>
+
+            </form>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+<footer th:replace="fragments/commons :: footer"></footer>
+
+
+</body>
+
+</html>

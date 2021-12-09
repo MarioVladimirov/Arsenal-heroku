@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "spring.mvc.sql.init.mode",
+      "type": "java.lang.String",
+      "description": "Description for spring.mvc.sql.init.mode."
+    },
+    {
+      "name": "spring.jpa.logging.level.org.hibernate.SQL",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.logging.level.org.hibernate.SQL."
+    },
+    {
+      "name": "spring.jpa.mvc.hiddenmethod.filter.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.mvc.hiddenmethod.filter.enabled."
+    },
+    {
+      "name": "cloudinary.cloud-name",
+      "type": "java.lang.String",
+      "description": "Description for cloudinary.cloud-name."
+    },
+    {
+      "name": "servlet.jpa.database-platform",
+      "type": "java.lang.String",
+      "description": "Description for servlet.jpa.database-platform."
+    }
+  ] }

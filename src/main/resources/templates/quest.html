@@ -1,0 +1,47 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar"></header>
+
+<main>
+    <section class="container">
+
+        <div class="row">
+            <div th:replace="fragments/commons :: leftColumn"></div>
+
+            <!--                <button id="submit">Start</button>-->
+
+            <div class="main">
+                <div class="container">
+                    <div class="row" id="rowQuiz">
+
+                        <div class="quiz-container" id="quiz" style="width: 250px;">
+
+                            <button id="submitStart" >Start</button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="fragments/commons :: footer"></footer>
+
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/quest.js}"></script>
+</body>
+
+</html>
+

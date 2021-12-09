@@ -1,0 +1,115 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar">
+
+</header>
+
+<input type="hidden" name="newsId" id="newsId" th:value="${newsDetails.id}">
+
+    <main>
+        <section class="container">
+
+            <div class="row" style="margin-top: 50px;"  >
+                <div th:replace="fragments/commons :: leftColumn"></div>
+
+                <div class="main">
+                    <div th:object="${newsDetails}" class="container">
+                        <h1 th:text="*{topic}">Дамите - футбол, вдъхновение, страст и благотворителност!</h1>
+                        <h5 th:text="|от *{user.username}, *{localDate}|">от Mario, Dec 7, 2017</h5>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="imgAbt">
+                                    <img width="100%" height="100%" th:src="*{urlPictureNews}" />
+                                </div>
+                            </div>
+                            <div th:text="*{description}" class="col-md-12">
+                                <p>Някои твърдят, че футбола е „мъжка“ игра. Оооо, тeзи хора явно никога не са гледали
+
+                                </p>
+                            </div>
+                            <th:block th:if="*{canDelete}" >
+
+                                <div  class="card-footer text-center">
+                                    <button  class="button" style="vertical-align:middle"><a th:href="@{/news/edit/{id}(id=*{id})}">Edit</a></button>
+                                </div>
+                                <div class="card-footer text-center">
+
+                                    <!--                                <button  class="buttonDelete" style="vertical-align:middle"><a >Delete</a></button>-->
+                                    <form class="" th:action="@{/news/{id}(id=*{id})}" th:method="delete">
+                                        <!--                                    <input type="submit" class="" value="Delete"/>-->
+                                        <input type="hidden" name="public_id" th:value="*{publicId}" >
+                                        <button class="button" style="vertical-align:middle"><a>Delete</a></button>
+                                    </form>
+
+
+                                </div>
+                            </th:block>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comment section -->
+
+        <div class="container mt-5 p-4">
+            <div class="d-flex justify-content-center row">
+                <div class="col-md-12">
+                    <div class="d-flex flex-column comment-section" id="commentCtnr">
+                        <!-- commentar -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="bg-light p-2">
+<!--            <div class="d-flex flex-row align-items-start"><img class="rounded-circle"-->
+<!--                                                               width="40"> <i class="fas fa-user"></i> <textarea-->
+<!--                    class="form-control ml-1 shadow-none textarea"></textarea></div>-->
+<!--            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm  "-->
+<!--                                                 type="button">Post comment</button>-->
+<!--            </div>-->
+
+            <form id="commentForm" method="POST"
+                  th:action="@{/api/{newsId}/comments(newsId=${newsDetails.id})}">
+                <div class="form-group">
+                    <h4>Leave a comment</h4>
+                    <label for="message">Message</label>
+                    <textarea name="message"
+                              id="message"
+                              cols="30"
+                              rows="5"
+                              class="form-control"
+                              style="background-color: white;"></textarea>
+                    <small id="messageError" class="invalid-feedback">
+                        Message should be at least 10 characters.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit"
+                           class="btn"
+                           id="postComment"
+                           value="Post Comment"/>
+                </div>
+            </form>
+
+        </div>
+
+
+    </main>
+<footer th:replace="fragments/commons :: footer"></footer>
+
+<script th:src="@{/js/comments.js}"></script>
+</body>
+
+</html>

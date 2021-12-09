@@ -1,0 +1,68 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body class="content">
+<header th:replace="fragments/commons :: navigation_menubar"></header>
+<main>
+
+    <img src="/images/shop/onlineShopBanner.jpg" class="img-fluid" alt="Banner Arsenal Bulgaria Shop">
+    <section>
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div th:each="p : ${allProducts}" class="col">
+                <div class="card">
+                    <img th:src="${p.urlPicture}" class="card-img-top" alt="..." height="150px" width="120px"/>
+                    <div class="card-body">
+                        <h5 th:text="${p.productName}" class="card-title text-center">Playing cards "Arsenal
+                            Bulgaria"</h5>
+
+                        <p th:text="${p.countProduct == 0} ? 'Comming soon': (${p.price}) + 'lv.'" class="card-text text-center fw-bold"> price: 4.00lv</p>
+
+<!--                        <div sec:authorize="isAuthenticated()" class="ipsFieldRow_content m-2">-->
+<!--                            <input type="number" name="quantity" size="1" value="1" class="ipsField_short" min="1"-->
+<!--                                   th:max="${p.countProduct}"-->
+<!--                                   step="any">-->
+<!--                        </div>-->
+
+                        <div th:if="${p.countProduct > 0}" sec:authorize="isAuthenticated()"
+                             class="card-footer text-center">
+                            <button class="button" style="vertical-align:middle"><a
+                                    th:href="@{/order/{id}(id=*{p.id})}">Buy</a></button>
+                        </div>
+                        <!--                        sec:authorize="hasRole('ADMIN')"-->
+                        <th:block th:if="${isAdmin}">
+
+                            <div class="card-footer text-center">
+                                <button class="button" style="vertical-align:middle"><a
+                                        th:href="@{/product/{id}/edit(id=*{p.id})}">Edit</a></button>
+                            </div>
+
+                            <div class="card-footer text-center">
+                                <form class="" th:action="@{/product/{id}(id=*{p.id})}" th:method="delete">
+                                    <!--                                    <input type="submit" class="" value="Delete"/>-->
+                                    <input type="hidden" name="public_id" th:value="${p.publicId}">
+                                    <button class="button" style="vertical-align:middle"><a>Delete</a></button>
+                                </form>
+
+
+                            </div>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+<footer th:replace="fragments/commons :: footer"></footer>
+
+
+</body>
+
+</html>
+
